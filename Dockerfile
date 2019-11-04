@@ -1,4 +1,4 @@
-FROM freeradius/freeradius-server:3.0.19
+FROM blacs30/freeradius-ubuntu18:v3.0.19
 RUN apt update \
     && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends samba winbind krb5-kdc busybox-static \
     && apt-get autoremove && apt-get clean \

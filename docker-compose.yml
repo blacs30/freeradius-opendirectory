@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  freeradius:
+    image: freeradius
+    restart: always
+    volumes:
+      - freeradius:/var/log/freeradius
+    environment:
+      - SAMBA_REALM=EXAMPLE.LOCAL
+      - SAMBA_SECURITY=ads
+      - SAMBA_WORKGROUP=EXAMPLE
+      - KDC_SERVER=dc1.example.local,dc2.example.local
+      - MY_REALM=EXAMPLE.LOCAL
+      - FREERADIUS_CLIENT_HOST=192.168.0.133
+      - FREERADIUS_CLIENT_SECRET=<FREERADIUS_CLIENT_SECRET>
+      - SSL_PRIV_KEY_PASSWORD=<SSL_PRIV_KEY_PASSWORD>
+      - FREERADIUS_ACCOUNT_HOST=192.168.0.133
+      - FREERADIUS_PROXY_SECRET=<FREERADIUS_PROXY_SECRET>
+      - SAMBA_PASSWORD=<SAMBA_PASSWORD>
+    command: freeradius -X
+
+  cron:
+    image: freeradius
+    restart: always
+    volumes:
+      - freeradius:/var/log/freeradius
+    entrypoint: /cron.sh
+    depends_on:
+      - freeradius
+
+volumes:
+  freeradius:

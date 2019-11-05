@@ -139,15 +139,21 @@ fi
 # check for the expected command
 if [ "$1" = 'freeradius' ]; then
     initialize
-    shift
-    exec freeradius -f "$@"
+    # shift
+    while true;
+    do
+        freeradius -X "$@"
+    done
 fi
 
 # many people are likely to call "radiusd" as well, so allow that
 if [ "$1" = 'radiusd' ]; then
     initialize
-    shift
-    exec freeradius -f "$@"
+    # shift
+    while true;
+    do
+        freeradius -X "$@"
+    done
 fi
 
 # else default to run whatever the user wanted like "bash" or "sh"

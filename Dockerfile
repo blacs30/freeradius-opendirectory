@@ -12,7 +12,7 @@ ADD files/krb5.conf.tpl /etc/krb5.conf.tpl
 ADD files/smb.conf.tpl /etc/samba/smb.conf.tpl
 ADD *.sh /
 RUN cd /etc/freeradius/sites-enabled \
-    && ln -s ../sites-available/copy-acct-to-home-server ./copy-acct-to-home-server \
+    && ln -fs ../sites-available/copy-acct-to-home-server ./copy-acct-to-home-server \
     && chmod +x /*.sh
 
 VOLUME /var/log/freeradius

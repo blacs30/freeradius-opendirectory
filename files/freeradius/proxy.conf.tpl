@@ -65,7 +65,7 @@ proxy server {
     #
     #  allowed values: {yes, no}
     #
-    default_fallback = no
+    default_fallback = yes
 
 }
 
@@ -257,7 +257,7 @@ home_server localhost {
     #  If you believe you need it, email the freeradius-users
     #  list, and explain why it should stay in the server.
     #
-#   no_response_fail = no
+    # no_response_fail = no
 
     #
     #  If the home server does not respond to ANY packets during
@@ -410,7 +410,7 @@ home_server localhost {
     #  probability of spurious fail-over and fallback attempts.
     #
     #  Useful range of values: 3 to 10
-    num_answers_to_alive = 3
+    num_answers_to_alive = 1
 
     #
     #  Limit the total number of outstanding packets to the home

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+# set -e
 # set -x
 
 cp -f /etc/freeradius/mods-available/detail.log.tpl /etc/freeradius/mods-available/detail.log
@@ -90,11 +90,12 @@ function eap_config {
 function initialize {
     # workaround for winbind to work
     # this seems not to be enough, so adding freerad user to root group:
-    # usermod -a -G winbindd_priv freerad
+    usermod -a -G winbindd_priv freerad;
     usermod -a -G root freerad \
     && /etc/init.d/smbd start \
     && /etc/init.d/winbind start \
-    && chmod 755 -R /var/run/samba
+    && chmod 755 -R /var/run/samba \
+    && chown root:winbindd_priv /var/lib/samba/winbindd_privileged/
 
     if [ -z ${SAMBA_PASSWORD} ]; then
         echo "Missing SAMBA_PASSWORD variable.";
